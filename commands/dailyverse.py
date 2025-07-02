@@ -9,6 +9,17 @@ from services.user_settings_db import get_user_settings
 from config.colors import STANDARD_COLOR, ERROR_COLOR
 from config.paths import TRANSLATIONS, ALTERNATIVE_BOOK_NAMES, POLISH_BOOK_NAMES
 
+async def translation_autocomplete(
+    interaction: discord.Interaction,
+    current: str,
+) -> list[app_commands.Choice[str]]:
+    bible_translations = load_json(TRANSLATIONS)
+    return [
+        app_commands.Choice(name=full_name, value=abbreviation)
+        for abbreviation, full_name in bible_translations.items()
+        if current.lower() in full_name.lower()
+    ][:25]
+
 def get_canonical_book_name(book, books):
     for canonical_book_name, aliases in books.items():
         if book in aliases:
@@ -16,13 +27,23 @@ def get_canonical_book_name(book, books):
     return book
 
 @app_commands.command(name="dailyverse", description="Wyświetla werset dnia z Biblii")
-async def dailyverse(interaction: discord.Interaction):
+@app_commands.describe(translation="Wybierz przekład Pisma Świętego")
+@app_commands.autocomplete(translation=translation_autocomplete)
+async def dailyverse(interaction: discord.Interaction, translation: str = None):
     await interaction.response.defer()
+
+    polish_book_names = load_json(POLISH_BOOK_NAMES)
+    bible_translations = load_json(TRANSLATIONS)
+    books = load_json(ALTERNATIVE_BOOK_NAMES)
 
     user_id = interaction.user.id
     user_data = get_user_settings(user_id)
 
-    if not user_data:
+    if translation:
+        chosen_translation = translation
+    elif user_data:
+        chosen_translation = user_data[1]
+    else:
         embed = discord.Embed(
             title="Ustaw domyślny przekład Pisma Świętego",
             description=(
@@ -31,16 +52,22 @@ async def dailyverse(interaction: discord.Interaction):
             ),
             color=STANDARD_COLOR
         )
-        await interaction.followup.send(embed=embed, ephemeral=True)
+        await interaction.followup.send(embed=embed)
+        return
+    
+    if chosen_translation not in bible_translations:
+        error_embed = discord.Embed(
+            title="Błąd",
+            description=(
+                "Podano błędny przekład Pisma Świętego. Użyj autouzupełniania lub sprawdź "
+                "dostępne skróty przekładów w komendzie `/versions`"
+            ),
+            color=ERROR_COLOR
+        )
+        await interaction.followup.send(embed=error_embed)
         return
 
-    translation = user_data[1]
-
     try:
-        polish_book_names = load_json(POLISH_BOOK_NAMES)
-        bible_translations = load_json(TRANSLATIONS)
-        books = load_json(ALTERNATIVE_BOOK_NAMES)
-
         response = requests.get("https://www.verseoftheday.com/")
         soup = BeautifulSoup(response.text, 'html.parser')
         reference_div = soup.find("div", class_="reference")
@@ -58,7 +85,7 @@ async def dailyverse(interaction: discord.Interaction):
         canonical_book_name = get_canonical_book_name(book, books)
         polish_book_name = polish_book_names.get(book, book)
 
-        passage = get_passage(translation, canonical_book_name, chapter, start_verse, end_verse)
+        passage = get_passage(chosen_translation, canonical_book_name, chapter, start_verse, end_verse)
 
         if not passage:
             error_embed = discord.Embed(
@@ -82,7 +109,7 @@ async def dailyverse(interaction: discord.Interaction):
             description=desc,
             color=STANDARD_COLOR
         )
-        embed.set_footer(text=bible_translations.get(translation, translation))
+        embed.set_footer(text=bible_translations.get(chosen_translation, chosen_translation))
         await interaction.followup.send(embed=embed)
 
     except Exception as e:
