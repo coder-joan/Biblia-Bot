@@ -1,9 +1,5 @@
 # Biblia Bot - twój towarzysz do studiowania Biblii na Discordzie
 
-## O bocie: 
-
-**Biblia** to bot, który umożliwia czytanie Pisma Świętego w wielu językach oraz porównywanie tekstów oryginalnych z ich tłumaczeniami. Bot zawiera przekłady Pisma Świętego w języku **polskim, angielskim, niemieckim, łacińskim, greckim i hebrajskim**
-
 ## Instalacja pakietów:
 
 * Wpisz w terminalu następujące komendy:
