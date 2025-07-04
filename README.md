@@ -1,6 +1,6 @@
 # Biblia Bot - twój towarzysz do studiowania Biblii na Discordzie
 
-## Instalacja pakietów:
+## Instalacja pakietów
 
 * Wpisz w terminalu następujące komendy:
 
@@ -28,14 +28,14 @@ pip install beautifulsoup4
 pip install requests
 ```
 
-## Utwórz plik `.env` z podaną strukturą:
+## Utwórz plik `.env` z podaną strukturą
 
 ``` python
 TOKEN='token_bota'
 SERVER_LINK='link_do_serwera'
 INVITE_LINK='link_z_zaproszeniem'
 ```
-## Tworzenie linku z zaproszeniem:
+## Tworzenie linku z zaproszeniem
 
 Link z zaproszeniem należy utworzyć w **Discord Developer Portal**
 1. Wejdź w aplikację bota
@@ -53,7 +53,7 @@ Link z zaproszeniem należy utworzyć w **Discord Developer Portal**
 
 W folderze `data` zostanie utworzona baza danych w pliku `user_settings.db` gdy pierwszy użytkownik ustawi domyślny przekład Pisma Świętego
 
-## Uruchomienie bota:
+## Uruchomienie bota
 
 * Wpisz w terminalu następującą komendę:
 
