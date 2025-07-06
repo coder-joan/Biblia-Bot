@@ -1,0 +1,86 @@
+import discord
+
+from utils.load_json import load_json
+from utils.italic_font import italic_font
+from utils.get_passage import get_passage
+from config.paths import TRANSLATIONS
+from config.colors import STANDARD_COLOR, ERROR_COLOR
+from services.user_settings_db import get_user_settings
+from utils.find_bible_references import find_bible_references
+
+def setup_message_event(client):
+    @client.event
+    async def on_message(message):
+        if message.author == client.user:
+            return
+
+        if message.content.startswith('/setversion'):
+            return
+
+        user_id = message.author.id
+        user_data = get_user_settings(user_id)
+
+        translation = user_data[1] if user_data else None
+
+        if not translation:
+            return
+        
+        words = message.content.split()
+
+        if words:
+            last_word = words[-1]
+
+            abbreviation = load_json(TRANSLATIONS)
+
+            if last_word in abbreviation:
+                translation = last_word
+                message.content = ' '.join(words[:-1])
+
+        await client.process_commands(message)
+        await process_message_with_translation(message, translation)
+
+async def process_message_with_translation(message, translation):
+    bible_translations = load_json(TRANSLATIONS)
+
+    bible_passage = []
+    bible_verses = find_bible_references(message.content)
+
+    for verse in bible_verses:
+        book, chapter, start, end = verse
+        if start is not None and end is not None:
+            passage = get_passage(translation, book, chapter, start, end)
+            bible_passage.append(passage)
+        elif start is not None:
+            passage = get_passage(translation, book, chapter, start, start)
+            bible_passage.append(passage)
+
+    for verses in bible_passage:
+        if verses and "verses" in verses:
+            header = f'{verses["book_name"]} {verses["chapter"]}:{verses["verses_range"]}'
+            desc = ""
+
+            for verse in verses["verses"]:
+                verse_text = italic_font(verse["text"]).replace("\n", " ").replace("  ", " ").strip()
+                desc += f"**({verse['verse']})** {verse_text} "
+
+            desc = (desc[:4093] + '...') if len(desc) > 4093 else desc
+
+            embed = discord.Embed(title=header, description=desc, color=STANDARD_COLOR)
+            embed.set_footer(text=bible_translations.get(translation, translation))
+            await message.channel.send(embed=embed)
+            
+        else:
+            error_embed = discord.Embed(
+                title="Błąd wyszukiwania",
+                description=(
+                    "Poniżej przedstawiono możliwe przyczyny błędu:\n\n"
+
+                    "- werset nie istnieje\n"
+                    "- przekład nie zawiera danej księgi\n"
+                    "- przekład nie zawiera Starego lub Nowego Testamentu\n\n"
+                    
+                    "Upewnij się, że wprowadzone dane są prawidłowe i spróbuj jeszcze raz"
+                ),
+                color=ERROR_COLOR
+            )
+            await message.channel.send(embed=error_embed)
