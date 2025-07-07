@@ -3,10 +3,10 @@ import discord
 from utils.load_json import load_json
 from utils.italic_font import italic_font
 from utils.get_passage import get_passage
+from utils.find_bible_references import find_bible_references
 from config.paths import TRANSLATIONS
 from config.colors import STANDARD_COLOR, ERROR_COLOR
 from services.user_settings_db import get_user_settings
-from utils.find_bible_references import find_bible_references
 
 def setup_message_event(client):
     @client.event
