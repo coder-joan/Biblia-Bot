@@ -1,4 +1,4 @@
-# 📖 Biblia Bot - twój towarzysz do studiowania Biblii na Discordzie
+# Biblia Bot - twój towarzysz do studiowania Biblii na Discordzie
 
 ## Funkcje bota
 
