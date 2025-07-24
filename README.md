@@ -1,4 +1,4 @@
-# Biblia Bot - twój towarzysz do studiowania Biblii na Discordzie
+# 📖 Biblia Bot - twój towarzysz do studiowania Biblii na Discordzie
 
 ## Funkcje bota
 
@@ -41,7 +41,7 @@ pip install requests
 
 ``` python
 TOKEN='token_bota'
-SERVER_LINK='link_do_serwera'
+SERVER_LINK='link_do_serwera_supportu'
 INVITE_LINK='link_z_zaproszeniem'
 ```
 ## Tworzenie linku z zaproszeniem
