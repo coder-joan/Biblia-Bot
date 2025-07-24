@@ -1,5 +1,14 @@
 # Biblia Bot - twój towarzysz do studiowania Biblii na Discordzie
 
+## Funkcje bota
+
+* 📅 wysyłanie wersetu dnia z Biblii
+* 🔍 wyszukiwanie fragmentów w Biblii
+* 📖 możliwość używania skrótów ksiąg
+* 🎲 wysyłanie losowego wersetu z Biblii
+* 📚 ustawienie domyślnego przekładu Pisma Świętego
+* 📑 porównanie fragmentu w różnych przekładach Pisma Świętego
+
 ## Instalacja pakietów
 
 * Wpisz w terminalu następujące komendy:
