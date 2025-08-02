@@ -1,5 +1,5 @@
 # 📖 Biblia Bot - twój towarzysz do studiowania Biblii na Discordzie
-
+---
 ## ⚙️ Funkcje bota
 
 - 📅 wysyłanie wersetu dnia
@@ -11,8 +11,6 @@
 - 📑 porównanie fragmentu w różnych przekładach Pisma Świętego
 ---
 ## 📂 Instalacja pakietów
-
-* Wpisz w terminalu następujące komendy:
 
 ``` python
 pip install discord.py
@@ -37,6 +35,8 @@ pip install requests
 ``` python
 pip install pytz
 ```
+---
+## 📝 Uzupełnienie danych
 
 ### Utwórz plik `.env` z podaną strukturą
 
@@ -58,14 +58,8 @@ Link z zaproszeniem należy utworzyć w **Discord Developer Portal**
 * Use Slash Commands
 * Manage Messages
 * Embed Links
-
-## Baza danych
-
-W folderze `data` zostaną utworzone bazy danych: `user_translation.db` i `dailyverse_settings.db`
-
+---
 ## Uruchomienie bota
-
-* Wpisz w terminalu następującą komendę:
 
 ``` python
 python main.py
