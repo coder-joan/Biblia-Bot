@@ -1,24 +1,21 @@
-# Biblia Bot - twój towarzysz do studiowania Biblii na Discordzie
+# 📖 Biblia Bot - twój towarzysz do studiowania Biblii na Discordzie
 
-## Funkcje bota
+## ⚙️ Funkcje bota
 
-* 📅 wysyłanie wersetu dnia z Biblii
-* 🔍 wyszukiwanie fragmentów w Biblii
-* 📖 możliwość używania skrótów ksiąg
-* 🎲 wysyłanie losowego wersetu z Biblii
-* 📚 ustawienie domyślnego przekładu Pisma Świętego
-* 📑 porównanie fragmentu w różnych przekładach Pisma Świętego
-
-## Instalacja pakietów
+- 📅 wysyłanie wersetu dnia
+- 🎲 wysyłanie losowego wersetu
+- 🔍 wyszukiwanie fragmentów w Biblii
+- 📖 możliwość używania skrótów ksiąg
+- 🔁 automatyzacja wysyłania wersetu dnia
+- 📚 ustawienie domyślnego przekładu Pisma Świętego
+- 📑 porównanie fragmentu w różnych przekładach Pisma Świętego
+---
+## 📂 Instalacja pakietów
 
 * Wpisz w terminalu następujące komendy:
 
 ``` python
 pip install discord.py
-```
-
-``` python
-pip install asyncio
 ```
 
 ``` python
@@ -37,14 +34,18 @@ pip install beautifulsoup4
 pip install requests
 ```
 
-## Utwórz plik `.env` z podaną strukturą
+``` python
+pip install pytz
+```
+
+### Utwórz plik `.env` z podaną strukturą
 
 ``` python
 TOKEN='token_bota'
-SERVER_LINK='link_do_serwera_supportu'
 INVITE_LINK='link_z_zaproszeniem'
+SERVER_LINK='link_do_serwera_supportu'
 ```
-## Tworzenie linku z zaproszeniem
+### Tworzenie linku z zaproszeniem
 
 Link z zaproszeniem należy utworzyć w **Discord Developer Portal**
 1. Wejdź w aplikację bota
@@ -60,7 +61,7 @@ Link z zaproszeniem należy utworzyć w **Discord Developer Portal**
 
 ## Baza danych
 
-W folderze `data` zostanie utworzona baza danych w pliku `user_settings.db` gdy pierwszy użytkownik ustawi domyślny przekład Pisma Świętego
+W folderze `data` zostaną utworzone bazy danych: `user_translation.db` i `dailyverse_settings.db`
 
 ## Uruchomienie bota
 
