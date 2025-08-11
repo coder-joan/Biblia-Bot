@@ -31,6 +31,6 @@
   ```
 
 3. Uruchom bota
-```bash
-python main.py
-```
+  ```bash
+  python main.py
+  ```
