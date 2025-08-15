@@ -3,6 +3,7 @@
 **Biblia** to bot przeznaczony do studiowania Słowa Bożego na Discordzie. Umożliwia porównywanie przekładów Pisma Świętego w **4** językach: **polskim**, **łacińskim**, **greckim** i **hebrajskim**
 
 ---
+
 ## ⚙️ Funkcje bota
 
 - 📅 wysyłanie wersetu dnia
@@ -12,6 +13,7 @@
 - 🔁 automatyzacja wysyłania wersetu dnia
 - 📚 ustawienie domyślnego przekładu Pisma Świętego
 - 📑 porównanie fragmentu w różnych przekładach Pisma Świętego
+
 ---
 
 ## 📦 Pierwsze kroki
