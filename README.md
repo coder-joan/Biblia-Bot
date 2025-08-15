@@ -16,13 +16,19 @@
 
 ## 📦 Pierwsze kroki
 
-1. Zainstaluj pakiety
+1. Sklonuj repozytorium
+  ```bash
+  git clone https://github.com/coder-joan/Biblia-Bot.git
+  cd Biblia-Bot
+  ```
+
+2. Zainstaluj pakiety
 
   ```bash
   pip install -r requirements.txt
   ```
 
-2. Utwórz plik `.env`
+3. Utwórz plik `.env`
 
   ```env
   TOKEN='token_bota'
@@ -30,7 +36,7 @@
   SERVER_LINK='link_do_serwera_supportu'
   ```
 
-3. Uruchom bota
+4. Uruchom bota
   ```bash
   python main.py
   ```
