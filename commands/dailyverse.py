@@ -6,7 +6,8 @@ from utils.load_json import load_json
 from utils.italic_font import italic_font
 from utils.get_passage import get_passage
 from utils.autocomplete import translation_autocomplete
-from services.user_settings_db import get_user_settings
+from services.user_translation_db import get_user_settings
+from services.dailyverse_settings_db import get_dailyverse_settings
 from config.colors import STANDARD_COLOR, ERROR_COLOR
 from config.paths import TRANSLATIONS, ALTERNATIVE_BOOK_NAMES, POLISH_BOOK_NAMES
 
@@ -16,7 +17,7 @@ def get_canonical_book_name(book, books):
             return canonical_book_name
     return book
 
-@app_commands.command(name="dailyverse", description="Wyświetla werset dnia z Biblii")
+@app_commands.command(name="dailyverse", description="Wyświetla werset dnia")
 @app_commands.describe(translation="Wybierz przekład Pisma Świętego")
 @app_commands.autocomplete(translation=translation_autocomplete)
 async def dailyverse(interaction: discord.Interaction, translation: str = None):
@@ -27,6 +28,10 @@ async def dailyverse(interaction: discord.Interaction, translation: str = None):
     books = load_json(ALTERNATIVE_BOOK_NAMES)
 
     user_id = interaction.user.id
+    guild_id = interaction.guild.id
+
+    user_settings = get_dailyverse_settings(user_id, guild_id)
+    channel_id, hour, timezone = (user_settings if user_settings else (None, None, None))
     user_data = get_user_settings(user_id)
 
     if translation:
@@ -58,9 +63,9 @@ async def dailyverse(interaction: discord.Interaction, translation: str = None):
         return
 
     try:
-        response = requests.get("https://www.verseoftheday.com/")
+        response = requests.get("https://www.biblestudytools.com/bible-verse-of-the-day/")
         soup = BeautifulSoup(response.text, 'html.parser')
-        reference_div = soup.find("div", class_="reference")
+        reference_div = soup.find("div", class_="w-full mb-5")
         link = reference_div.find("a", href=True)
         verse_reference = link.text.strip()
 
