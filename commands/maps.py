@@ -5,7 +5,7 @@ from config.paths import MAPS
 from config.file_names import MAP_FILE_NAMES
 from config.colors import STANDARD_COLOR, ERROR_COLOR
 
-@app_commands.command(name="maps", description="Mapy z Biblii")
+@app_commands.command(name="maps", description="Wyświetla wybraną mapę")
 @app_commands.describe(map="Wybierz mapę")
 @app_commands.choices(map=[
     app_commands.Choice(name="Kraje podróży Abrahama", value="Kraje podróży Abrahama"),
