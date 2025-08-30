@@ -7,10 +7,10 @@ from utils.italic_font import italic_font
 from utils.autocomplete import translation_autocomplete
 from config.colors import STANDARD_COLOR, ERROR_COLOR
 from config.paths import POLISH_BOOK_NAMES, TRANSLATIONS
-from services.user_settings_db import get_user_settings
+from services.user_translation_db import get_user_settings
 from services.bibles_db import get_bible_connection, get_random_verse, get_following_verses
 
-@app_commands.command(name="random", description="Wyświetla losowy werset z Biblii")
+@app_commands.command(name="random", description="Wyświetla losowy werset")
 @app_commands.describe(translation="Wybierz przekład Pisma Świętego")
 @app_commands.autocomplete(translation=translation_autocomplete)
 async def random(interaction: discord.Interaction, translation: str = None):
