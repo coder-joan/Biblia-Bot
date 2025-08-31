@@ -2,28 +2,28 @@ import discord, os
 
 from dotenv import load_dotenv
 from discord.ext import commands
-from events.on_ready import setup_ready_event
-from events.on_message import setup_message_event
-from events.on_guild_join import setup_guild_join_event
-from events.on_command_error import setup_command_error_event
+from src.events.on_ready import setup_ready_event
+from src.events.on_message import setup_message_event
+from src.events.on_guild_join import setup_guild_join_event
+from src.events.on_command_error import setup_command_error_event
 
-from commands.cleardailyverse import cleardailyverse
-from commands.cleartranslation import cleartranslation
-from commands.compare import compare
-from commands.dailyverse import dailyverse
-from commands.help import help
-from commands.information import information
-from commands.invite import invite
-from commands.maps import maps
-from commands.mysettings import mysettings
-from commands.passage import passage
-from commands.random import random
-from commands.search import search
-from commands.setdailyverse import setdailyverse
-from commands.setversion import setversion
-from commands.stats import stats
-from commands.support import support
-from commands.versions import versions
+from src.commands.cleardailyverse import cleardailyverse
+from src.commands.cleartranslation import cleartranslation
+from src.commands.compare import compare
+from src.commands.dailyverse import dailyverse
+from src.commands.help import help
+from src.commands.information import information
+from src.commands.invite import invite
+from src.commands.maps import maps
+from src.commands.mysettings import mysettings
+from src.commands.passage import passage
+from src.commands.random import random
+from src.commands.search import search
+from src.commands.setdailyverse import setdailyverse
+from src.commands.setversion import setversion
+from src.commands.stats import stats
+from src.commands.support import support
+from src.commands.versions import versions
 
 intents = discord.Intents.default()
 intents.message_content = True
