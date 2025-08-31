@@ -5,7 +5,7 @@ from utils.load_json import load_json
 from utils.italic_font import italic_font
 from utils.paginator_view import PaginatorView
 from utils.autocomplete import translation_autocomplete
-from services.user_settings_db import get_user_settings
+from services.user_translation_db import get_user_settings
 from services.bibles_db import search_verses, count_verses
 from config.colors import STANDARD_COLOR, ERROR_COLOR
 from config.paths import TRANSLATIONS, POLISH_BOOK_NAMES
@@ -18,7 +18,7 @@ def create_embed(title: str, message: str, translation: str, verse_count: int) -
         color=STANDARD_COLOR
     )
 
-@app_commands.command(name="search", description="Wyszukiwanie fragmentów w Biblii")
+@app_commands.command(name="search", description="Wyszukuje fragmenty zawierające dane słowo lub frazę")
 @app_commands.describe(text="Wpisz słowo lub frazę", translation="Wybierz przekład Pisma Świętego")
 @app_commands.autocomplete(translation=translation_autocomplete)
 async def search(interaction: discord.Interaction, text: str, translation: str = None):
