@@ -5,7 +5,7 @@ from config.paths import TRANSLATIONS
 from config.colors import ERROR_COLOR, SUCCESS_COLOR
 from utils.load_json import load_json
 from utils.autocomplete import translation_autocomplete
-from services.user_settings_db import set_user_translation
+from services.user_translation_db import set_user_translation
 
 @app_commands.command(name="setversion", description="Ustawia domyślny przekład Pisma Świętego")
 @app_commands.describe(translation="Wybierz przekład Pisma Świętego")
